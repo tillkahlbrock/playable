@@ -1,0 +1,21 @@
+PB\PlayableBundle\Entity\Playground:
+    type: entity
+    table: null
+    repositoryClass: PB\PlayableBundle\Entity\PlaygroundRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '120'
+        latitude:
+            type: string
+            length: '50'
+        longitude:
+            type: string
+            length: '50'
+    lifecycleCallbacks: {  }

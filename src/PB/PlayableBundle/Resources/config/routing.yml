@@ -1,0 +1,12 @@
+pb_playable_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: PBPlayableBundle:Default:index }
+
+
+create:
+    pattern: /playground/create
+    defaults: { _controller: PBPlayableBundle:Playground:create }
+
+show:
+    pattern: /playground/show
+    defaults: { _controller: PBPlayableBundle:Playground:show }

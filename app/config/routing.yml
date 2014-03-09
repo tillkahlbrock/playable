@@ -1,0 +1,4 @@
+pb_playable:
+    resource: "@PBPlayableBundle/Resources/config/routing.yml"
+    prefix:   /
+

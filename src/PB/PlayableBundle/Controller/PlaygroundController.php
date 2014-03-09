@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use PB\PlayableBundle\Entity\Playground;
 use PB\PlayableBundle\Form\PlaygroundType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Playground controller.
@@ -14,6 +15,8 @@ use PB\PlayableBundle\Form\PlaygroundType;
  */
 class PlaygroundController extends Controller
 {
+    const CONTENT_TYPE_JSON = 'json';
+    const STATUS_NOT_ACCEPTABLE = 406;
 
     /**
      * Lists all Playground entities.
@@ -29,28 +32,25 @@ class PlaygroundController extends Controller
             'entities' => $entities,
         ));
     }
-    /**
-     * Creates a new Playground entity.
-     *
-     */
+
     public function createAction(Request $request)
     {
-        $entity = new Playground();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('playground_show', array('id' => $entity->getId())));
+        if ($request->getContentType() != self::CONTENT_TYPE_JSON) {
+            return new Response('Illegal content type', self::STATUS_NOT_ACCEPTABLE);
         }
 
-        return $this->render('PBPlayableBundle:Playground:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $data = json_decode($request->getContent(), true);
+
+        $playground = new Playground();
+        $playground->setName($data['name']);
+        $playground->setLatitude($data['latitude']);
+        $playground->setLongitude($data['longitude']);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($playground);
+        $em->flush();
+
+        return new Response();
     }
 
     /**

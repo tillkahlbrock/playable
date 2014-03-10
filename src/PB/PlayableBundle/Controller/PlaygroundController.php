@@ -22,7 +22,7 @@ class PlaygroundController extends Controller
      * Lists all Playground entities.
      *
      */
-    public function indexAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
 

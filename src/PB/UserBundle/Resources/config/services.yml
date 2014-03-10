@@ -1,0 +1,7 @@
+parameters:
+#    pb_user.example.class: PB\UserBundle\Example
+
+services:
+#    pb_user.example:
+#        class: %pb_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -16,6 +16,7 @@ class PlaygroundController extends Controller
 {
     const CONTENT_TYPE_JSON = 'json';
     const STATUS_NOT_ACCEPTABLE = 406;
+    const STATUS_NO_CONTENT = 204;
 
     public function listAction()
     {
@@ -101,6 +102,18 @@ class PlaygroundController extends Controller
 
     public function deleteAction(Request $request, $id)
     {
-        return new Response('Not implemented yet', 404);
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Playground $playground */
+        $playground = $em->getRepository('PBPlayableBundle:Playground')->find($id);
+
+        if (!$playground) {
+            return $this->createNotFoundException();
+        }
+
+        $em->remove($playground);
+        $em->flush();
+
+        return new Response('', self::STATUS_NO_CONTENT);
     }
 }

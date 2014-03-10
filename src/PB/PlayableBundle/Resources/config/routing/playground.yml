@@ -21,7 +21,7 @@ playground_edit:
     defaults: { _controller: "PBPlayableBundle:Playground:edit" }
 
 playground_update:
-    pattern:  /{id}/update
+    pattern:  /{id}
     defaults: { _controller: "PBPlayableBundle:Playground:update" }
     requirements: { _method: post|put }
 

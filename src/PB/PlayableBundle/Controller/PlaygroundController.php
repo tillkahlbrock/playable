@@ -62,6 +62,34 @@ class PlaygroundController extends Controller
         return new Response();
     }
 
+    public function updateAction(Request $request, $id)
+    {
+
+        if ($request->getContentType() != self::CONTENT_TYPE_JSON) {
+            return new Response('Illegal content type', self::STATUS_NOT_ACCEPTABLE);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Playground $playground */
+        $playground = $em->getRepository('PBPlayableBundle:Playground')->find($id);
+
+        if (!$playground) {
+            throw $this->createNotFoundException('Unable to find Playground entity.');
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        $playground->setName($data['name']);
+        $playground->setLatitude($data['latitude']);
+        $playground->setLongitude($data['longitude']);
+
+        $em->persist($playground);
+        $em->flush();
+
+        return new Response('successfully updated playground (' . $id . ')');
+    }
+
     /**
     * Creates a form to create a Playground entity.
     *
@@ -158,36 +186,6 @@ class PlaygroundController extends Controller
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
-    }
-    /**
-     * Edits an existing Playground entity.
-     *
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('PBPlayableBundle:Playground')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Playground entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('playground_edit', array('id' => $id)));
-        }
-
-        return $this->render('PBPlayableBundle:Playground:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
     /**
      * Deletes a Playground entity.

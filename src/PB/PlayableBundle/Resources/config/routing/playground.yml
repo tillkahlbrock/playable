@@ -6,6 +6,7 @@ playground:
 playground_show:
     pattern:  /{id}
     defaults: { _controller: "PBPlayableBundle:Playground:show" }
+    requirements: { _method: get }
 
 playground_create:
     pattern:  /

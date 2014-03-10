@@ -87,7 +87,16 @@ class PlaygroundController extends Controller
 
     public function showAction($id)
     {
-        return new Response('Not implemented yet', 404);
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Playground $playground */
+        $playground = $em->getRepository('PBPlayableBundle:Playground')->find($id);
+
+        $data['name'] = $playground->getName();
+        $data['latitude'] = $playground->getLatitude();
+        $data['longitude'] = $playground->getLongitude();
+
+        return new Response(json_encode($data));
     }
 
     public function deleteAction(Request $request, $id)

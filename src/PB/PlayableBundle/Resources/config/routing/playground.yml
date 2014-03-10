@@ -1,6 +1,7 @@
 playground:
     pattern:  /
     defaults: { _controller: "PBPlayableBundle:Playground:index" }
+    requirements: { _method: get }
 
 playground_show:
     pattern:  /{id}/show

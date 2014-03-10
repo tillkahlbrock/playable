@@ -26,11 +26,20 @@ class PlaygroundController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('PBPlayableBundle:Playground')->findAll();
+        /** @var Playground[] $playgrounds */
+        $playgrounds = $em->getRepository('PBPlayableBundle:Playground')->findAll();
 
-        return $this->render('PBPlayableBundle:Playground:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        $responseData = [];
+
+        foreach ($playgrounds as $playground) {
+            $pg = [];
+            $pg['name'] = $playground->getName();
+            $pg['latitude'] = $playground->getLatitude();
+            $pg['longitude'] = $playground->getLongitude();
+            $responseData[] = $pg;
+        }
+
+        return new Response(json_encode($responseData));
     }
 
     public function createAction(Request $request)

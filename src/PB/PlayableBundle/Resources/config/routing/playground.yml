@@ -4,28 +4,20 @@ playground:
     requirements: { _method: get }
 
 playground_show:
-    pattern:  /{id}/show
+    pattern:  /{id}
     defaults: { _controller: "PBPlayableBundle:Playground:show" }
-
-playground_new:
-    pattern:  /new
-    defaults: { _controller: "PBPlayableBundle:Playground:new" }
 
 playground_create:
     pattern:  /
     defaults: { _controller: "PBPlayableBundle:Playground:create" }
     requirements: { _method: post }
 
-playground_edit:
-    pattern:  /{id}/edit
-    defaults: { _controller: "PBPlayableBundle:Playground:edit" }
-
 playground_update:
     pattern:  /{id}
     defaults: { _controller: "PBPlayableBundle:Playground:update" }
-    requirements: { _method: post|put }
+    requirements: { _method: put }
 
 playground_delete:
-    pattern:  /{id}/delete
+    pattern:  /{id}
     defaults: { _controller: "PBPlayableBundle:Playground:delete" }
-    requirements: { _method: post|delete }
+    requirements: { _method: delete }

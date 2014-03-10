@@ -12,7 +12,7 @@ playground_new:
     defaults: { _controller: "PBPlayableBundle:Playground:new" }
 
 playground_create:
-    pattern:  /create
+    pattern:  /
     defaults: { _controller: "PBPlayableBundle:Playground:create" }
     requirements: { _method: post }
 

@@ -18,6 +18,11 @@ class PlaygroundController extends Controller
     const STATUS_NOT_ACCEPTABLE = 406;
     const STATUS_NO_CONTENT = 204;
 
+    public function addAction()
+    {
+        return new Response($this->renderView('PBPlayableBundle:Playground:add.html.twig'));
+    }
+
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();

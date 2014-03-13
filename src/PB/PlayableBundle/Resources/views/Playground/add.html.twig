@@ -1,23 +1,7 @@
-<html>
-<head>
-    {% block stylesheets %}
-        {% stylesheets
-            '../app/Resources/public/vendor/bootstrap/dist/css/bootstrap.min.css' filter='cssrewrite'
-            '../app/Resources/public/vendor/bootstrap/dist/css/bootstrap-theme.min.css' filter='cssrewrite'
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
-    {% endblock %}
-</head>
-<body>
-    <h1>Add</h1>
+{% extends '::base.html.twig' %}
 
-    {% block javascripts%}
-        {% javascripts
-        '../app/Resources/public/vendor/jquery/dist/jquery.js'
-        %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
-</body>
-</html>
+{% block title %}Add a new playground{% endblock %}
+
+{% block body %}
+    <h1>Add</h1>
+{% endblock %}

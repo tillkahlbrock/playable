@@ -72,3 +72,14 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: PB\UserBundle\Entity\User
+
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: ['*']
+        allow_headers: ['*']
+        hosts: []
+    paths:
+        '^/':
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+            max_age: 3600

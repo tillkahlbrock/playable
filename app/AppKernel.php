@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new PB\PlayableBundle\PBPlayableBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
             new PB\UserBundle\PBUserBundle(),
+            new \Nelmio\CorsBundle\NelmioCorsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

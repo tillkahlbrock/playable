@@ -3,6 +3,10 @@ playground:
     defaults: { _controller: "PBPlayableBundle:Playground:list" }
     requirements: { _method: get }
 
+playground_add:
+    pattern: /add
+    defaults: { _controller: "PBPlayableBundle:Playground:add" }
+
 playground_show:
     pattern:  /{id}
     defaults: { _controller: "PBPlayableBundle:Playground:show" }

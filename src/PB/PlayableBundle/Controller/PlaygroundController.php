@@ -18,6 +18,37 @@ class PlaygroundController extends Controller
     const STATUS_NOT_ACCEPTABLE = 406;
     const STATUS_NO_CONTENT = 204;
 
+    public function addAction(Request $request)
+    {
+        $playground = new Playground();
+        $form = $this->createFormBuilder($playground)
+            ->add('name', 'text')
+            ->add('latitude', 'number')
+            ->add('longitude', 'number')
+            ->add('save', 'submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $data = $form->getData();
+            $playground->setName($data->getName());
+            $playground->setLongitude($data->getLongitude());
+            $playground->setLatitude($data->getLatitude());
+            $em->persist($playground);
+            $em->flush();
+            return $this->redirect($this->generateUrl('playground'));
+        }
+
+        return $this->render(
+            'PBPlayableBundle:Playground:add.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
+    }
+
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
